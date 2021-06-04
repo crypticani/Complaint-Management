@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2 class="bg-dark text-white">Report</h2>
+        <form method="post">
+        {% csrf_token %}
+            From Date: <input type="date" id="from_date" name="from_date">
+            To Date: <input type="date" id="to_date" name="to_date">
+            Status: <select name="Status">
+                        <option value="All">All</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Working">Working</option>
+                        <option value="Done">Done</option>
+                    </select>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br>
+      {% if data %}
+      <div class="table table-responsive">
+      <table align="center">
+        <tr>
+          <th>Complain ID</th>
+          <th>Name</th>
+          <th>Assigned Date</th>
+          <th>Completion Date</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+     {% for mydata in data %}
+         <tr>
+         <td>{{ mydata.Complain_id }}</td>
+         <td>{{ mydata.Name }}</td>
+         <td>{{ mydata.Assigned_Date }}</td>
+         <td>{{ mydata.Completed_Date }}</td>
+         <td>{{ mydata.Description }}</td>
+         <td>{{ mydata.Status }}</td>
+        </tr>
+{% endfor %}
+  </table>
+  {% endif %}
+  <br><br>
+{% endblock %}
